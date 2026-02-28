@@ -1,176 +1,97 @@
-# 🍽️ Ottawa Menus — Restaurant Control Center
+OBO — Online Business Optimiser
+OBO is a premium, accessibility‑first platform that transforms raw business details into semantic, search‑ready, editorial‑quality business pages. It’s designed for local service businesses that need clarity, trust, and visibility — without hiring a full web team.
 
-A modern, cinematic admin dashboard for managing Ottawa restaurant data, generating branded menu cards, and preparing content for multi‑platform posting.
+Every OBO page is fast, accessible, WCAG‑minded, and structured for both humans and search engines. The result feels custom, intentional, and premium.
 
-This Control Center powers the Ottawa Menus ecosystem — a community‑focused platform that highlights local restaurants, improves their online visibility, and automates content creation.
+🌱 Purpose
+Local businesses often struggle with:
 
----
+Generic templates
 
-## 📸 Screenshots
+Poor accessibility
 
-> _Screenshots will be added as the UI evolves. Planned screenshots include:_
-- Restaurant List Page (Control Center)
-- Add Restaurant Form
-- Restaurant Detail Page (Menu Editor)
-- Menu Card Preview
-- Example Generated Menu Card
-- Google Maps Integration Example
+Weak SEO structure
 
----
+Inconsistent or unclear information
 
-## 🚀 Current Features
+OBO solves this by generating clean, semantic HTML with editorial polish and consistent structure — elevating local businesses beyond directory listings.
 
-### ✅ Restaurant List Page (`/control-center/restaurants`)
-A clean, responsive dashboard showing all restaurants in the system.
+🧭 How OBO Works
+You provide the essentials  
+Services, location, hours, accessibility details, and what makes the business unique.
 
-Includes:
-- Search by name, neighbourhood, cuisine, tags, categories  
-- Cinematic UI with blue‑grey background and elevated cards  
-- Delivery platform links (Uber Eats, DoorDash, SkipTheDishes)  
-- Google Maps link for each address  
-- Preview button → generates a menu card  
-- Post button → posts to Bluesky  
-- “Add Restaurant” button → opens the creation form  
+OBO builds the semantic page  
+Clean structure, correct landmarks, and premium editorial layout.
 
-Tech:
-- Next.js App Router  
-- TypeScript + TSX  
-- Tailwind CSS  
-- Supabase (Postgres)  
-- API routes for card generation + posting  
+You share or embed it anywhere  
+Google Business Profile, websites, social platforms, or as a standalone page.
 
----
+🧩 Core Features
+Semantic HTML with correct headings and ARIA landmarks
 
-## 🏗️ Architecture Overview
+WCAG‑minded accessibility baked into every page
 
-### 1. Restaurant List Page
-- Displays all restaurants  
-- Provides quick actions (Preview, Post)  
-- Links to Add Restaurant page  
-- Will eventually link to Restaurant Detail pages  
+Editorial clarity that feels premium and trustworthy
 
-### 2. Add Restaurant Page (coming next)
-Will allow adding:
-- Name  
-- Address  
-- Phone  
-- Neighbourhood  
-- Cuisine  
-- Tags  
-- Categories  
-- Website URL  
-- Delivery URLs  
-- Google Maps URL (optional)  
+Embeddable business cards for sharing and SEO
 
-### 3. Restaurant Detail Page (planned)
-Will allow:
-- Editing restaurant info  
-- Adding/editing menu items  
-- Previewing the menu card  
-- Posting the menu card  
-- Viewing delivery links  
-- Viewing website link  
-- Viewing Google Maps link  
+Consistent structure that improves search engine understanding
 
-### 4. Menu Card Generator
-- `/api/generate-card?id=123`  
-- Generates a branded HTML menu card  
-- Used for Preview + posting  
+Mobile‑first, responsive layouts
 
----
+📸 Screenshots
+<div align="center">
 
-## 🗺️ Google Maps Integration
+🏠 Homepage
+<img src="./screenshots/homepage.jpeg" alt="OBO Homepage" width="800" />
 
-### ✔ Current:
-- Each restaurant address includes a **Google Maps link**  
-- Uses a search‑based link (works without coordinates)  
+ℹ️ About Page
+<img src="./screenshots/about.jpeg" alt="OBO About Page" width="800" />
 
-### ✔ Planned:
-- Add `google_maps_url` field to Supabase  
-- Store the exact Google Maps Place URL  
-- Display it on the detail page  
-- Use it in menu cards  
+</div>
 
-### ✔ Sales Pitch Feature:
-Ottawa Menus will help restaurant owners:
+🛠️ Tech Stack
+Next.js / React — modern, fast, accessible UI
 
-- Update their Google Maps photos  
-- Improve their Google Business Profile  
-- Improve their SEO  
-- Improve their online visibility  
-- Improve their delivery platform listings  
+TypeScript — reliability and maintainability
 
-### ❌ Not possible inside the app:
-- Uploading photos directly to Google Maps  
-- Editing Google Maps listings programmatically  
+Semantic HTML + ARIA — accessibility and structure
 
-### ✔ Possible with your service:
-- You (or the restaurant owner) upload photos manually  
-- You guide them through Google Business Profile optimization  
-- You store the correct Google Maps URL in your app  
+CSS Modules / Tailwind (depending on setup) — clean, scalable styling
 
----
+Postgres / API layer — structured business data (if applicable)
 
-## 📌 Future Features (Planned)
+📦 Getting Started
+Install dependencies
+bash
+npm install
+Run the development server
+bash
+npm run dev
+Visit http://localhost:3000 to view the app.
 
-### 🟦 Restaurant Detail Page
-- Edit restaurant info  
-- Add/edit/delete menu items  
-- Add delivery URLs  
-- Add website URL  
-- Add Google Maps URL  
-- Preview menu card  
-- Post menu card  
+📁 Project Structure
+txt
+/
+├─ app/                # Next.js routes (homepage, about, business pages)
+├─ components/         # Reusable UI components
+├─ lib/                # Utilities, parsers, helpers
+├─ public/             # Static assets (screenshots, icons)
+└─ styles/             # Global and component styles
+🧪 Example Output (Semantic Business Section)
+html
+<section aria-labelledby="business-name">
+  <h1 id="business-name">Greenline Physiotherapy</h1>
+  <p>Evidence-based physiotherapy in downtown Ottawa.</p>
+  <p><strong>Location:</strong> 245 Bank Street, Ottawa</p>
+  <p><strong>Hours:</strong> Mon–Fri · 8:00–18:00</p>
+  <p><strong>Contact:</strong> (613) 555-0192 · info@greenlinephysio.ca</p>
+  <p><strong>Accessibility:</strong> Step-free entrance, elevator, screen-reader friendly page.</p>
+</section>
+🎯 Vision
+OBO exists to make local businesses visible, trustworthy, and accessible — without complexity.
+It’s built with care, editorial intention, and a deep respect for structure.
 
-### 🟦 Menu Item Editor
-- Add menu items  
-- Add prices  
-- Add descriptions  
-- Add categories  
-- Add dietary tags  
-
-### 🟦 Menu Card Generator Enhancements
-- Multiple card layouts  
-- Seasonal templates  
-- Branding options  
-- Auto‑generated captions  
-
-### 🟦 Posting Automation
-- Bluesky  
-- Instagram  
-- Threads  
-- Google Business Posts  
-- Facebook Pages  
-
-### 🟦 Restaurant SEO Toolkit
-- Google Maps optimization  
-- Google Business Profile improvements  
-- Website link integration  
-- Delivery platform link verification  
-- Photo recommendations  
-
----
-
-## 🌱 Long‑Term Vision
-
-Ottawa Menus becomes a full SaaS ecosystem:
-
-- Restaurant discovery feed  
-- Automated posting  
-- Menu card generation  
-- Multi‑platform publishing  
-- Restaurant SEO improvement  
-- Google Maps optimization  
-- Delivery platform optimization  
-- Community‑driven content  
-
----
-
-## 🧩 Next Steps
-
-- Build the **New Restaurant Page**  
-- Build the **Restaurant Detail + Menu Editor Page**  
-- Add support for website + delivery URLs  
-- Add support for Google Maps URLs  
-- Expand the menu card generator  
+📜 License
+MIT License.
 
