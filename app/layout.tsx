@@ -1,4 +1,5 @@
 import "./globals.css";
+import "../styles/styles.css";
 
 export const metadata = {
   title: "OBO – Online Business Optimiser",
@@ -12,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased bg-[#F7F3EB] text-[#0A1A2F]">
+      <body className="antialiased bg-[var(--obo-white)] text-[var(--obo-black)]">
         {children}
       </body>
     </html>

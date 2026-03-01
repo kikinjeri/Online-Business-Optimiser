@@ -1,45 +1,59 @@
-import { supabaseServer } from "@/lib/supabaseServer";
-import { selectRestaurant } from "./actions";
+import { supabaseServer } from "@/lib/supabase/server";
 import Link from "next/link";
 
-export default async function RestaurantsPage() {
-  const supabase = supabaseServer();
-  const { data: restaurants } = await supabase
-    .from("restaurants")
+export default async function BusinessIndexPage() {
+  const supabase = await supabaseServer();
+
+  const { data: businesses, error } = await supabase
+    .from("businesses")
     .select("*")
     .order("name");
 
   return (
-    <main className="max-w-3xl mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-6">Restaurants</h1>
+    <div className="container">
+      {/* NAVBAR */}
+      <nav className="navbar">
+        <div className="nav-left">
+          <Link href="/">OBO</Link>
+        </div>
 
-      <ul className="space-y-4">
-        {restaurants?.map((r) => (
-          <li key={r.id} className="border p-4 rounded-lg">
-            <div className="font-semibold">{r.name}</div>
+        <div className="nav-right">
+          <Link href="/">Home</Link>
+          <Link href="/about">About</Link>
+          <Link href="/businesses">Business</Link>
+        </div>
+      </nav>
 
-            <form action={selectRestaurant}>
-              <input type="hidden" name="id" value={r.id} />
+      {/* BUSINESS LIST */}
+      <section>
+        <h1 className="hero-title">Business</h1>
 
-              <div className="flex gap-4 mt-2">
-                <button
-                  formaction="/restaurants/view"
-                  className="text-blue-600 underline"
-                >
-                  View Menu
-                </button>
+        {error && <p>Error loading businesses.</p>}
+        {businesses?.length === 0 && <p>No businesses found.</p>}
 
-                <button
-                  formaction="/restaurants/edit"
-                  className="text-blue-600 underline"
-                >
-                  Edit
-                </button>
+        <div className="business-list">
+          {businesses?.map((b) => (
+            <div key={b.id} className="business-row">
+              <div>
+                <div className="business-name">{b.name}</div>
+                <div className="business-category">{b.category}</div>
+                <div className="business-category">{b.status}</div>
               </div>
-            </form>
-          </li>
-        ))}
-      </ul>
-    </main>
+
+              <div>
+                <Link href={`/business/${b.slug}`}>View Profile</Link>
+                <span style={{ margin: "0 0.5rem" }}></span>
+                <Link href={`/business/${b.slug}/card`}>View Card</Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="footer">
+        © {new Date().getFullYear()} Online Business Optimiser.
+      </footer>
+    </div>
   );
 }
