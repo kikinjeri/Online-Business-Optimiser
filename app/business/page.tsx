@@ -31,31 +31,28 @@ export default async function BusinessPage() {
 
       <h1 className="directory-title">Local Businesses</h1>
 
-      <section className="directory-grid">
+      <section className="directory-list">
         {businesses.map((b) => (
           <Link
             key={b.id}
             href={`/business/${b.slug}`}
-            className="directory-card"
+            className="directory-row"
           >
-            <h2 className="card-name">{b.name}</h2>
+            <span className="row-name">{b.name}</span>
 
-            {b.tagline_en && <p className="card-tagline">{b.tagline_en}</p>}
+            <span className="row-tagline">{b.tagline_en || "—"}</span>
 
-            {b.address && (
-              <p className="card-address">
-                {b.address.street}, {b.address.city}
-              </p>
-            )}
+            <span className="row-phone">{b.phone || "—"}</span>
 
-            <div className="card-meta">
-              {b.phone && <span>{b.phone}</span>}
-              {b.website_url && (
-                <span>
-                  {b.website_url.replace("https://", "").replace("http://", "")}
-                </span>
-              )}
-            </div>
+            <span className="row-website">
+              {b.website_url
+                ? b.website_url.replace("https://", "").replace("http://", "")
+                : "—"}
+            </span>
+
+            <span className="row-city">{b.address?.city || "—"}</span>
+
+            <span className="row-view">View →</span>
           </Link>
         ))}
       </section>
