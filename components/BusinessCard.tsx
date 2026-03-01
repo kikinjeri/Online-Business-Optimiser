@@ -1,14 +1,5 @@
-// app/components/BusinessCard.tsx
+// components/BusinessCard.tsx
 import Link from "next/link";
-
-export interface BusinessCardProps {
-  name: string;
-  tagline?: string | null;
-  phone?: string | null;
-  address?: string | null;
-  slug: string;
-  services?: { name_en: string }[];
-}
 
 export default function BusinessCard({
   name,
@@ -17,7 +8,7 @@ export default function BusinessCard({
   address,
   slug,
   services = [],
-}: BusinessCardProps) {
+}) {
   return (
     <div
       role="region"
@@ -59,7 +50,7 @@ export default function BusinessCard({
           }}
         >
           {services.map((service) => (
-            <li key={service.name_en}>{service.name_en}</li>
+            <li key={service.id}>{service.name_en}</li>
           ))}
         </ul>
       )}

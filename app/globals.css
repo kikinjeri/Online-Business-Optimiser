@@ -117,3 +117,71 @@ html, body {
   border-top: 1px solid #222;
   margin-top: 4rem;
 }
+/* DIRECTORY PAGE WRAPPER */
+.business-directory {
+  padding-bottom: 60px;
+}
+
+/* PAGE TITLE */
+.directory-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 40px 0 20px;
+  color: #f5f7fa;
+}
+
+/* GRID LAYOUT */
+.directory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 32px;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* BUSINESS CARD */
+.directory-card {
+  display: block;
+  background: #0b0d10;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 24px;
+  text-decoration: none;
+  color: #f5f7fa;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.directory-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.55);
+}
+
+/* CARD CONTENT */
+.card-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+.card-tagline {
+  font-size: 0.95rem;
+  color: #c7cbd1;
+  margin: 0 0 12px;
+}
+
+.card-address {
+  font-size: 0.9rem;
+  color: #9ba0aa;
+  margin-bottom: 12px;
+}
+
+.card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: #4f8cff;
+}

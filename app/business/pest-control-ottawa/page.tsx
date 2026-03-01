@@ -1,5 +1,5 @@
 import Link from "next/link";
-import BusinessCard from "@/components/cards/BusinessCard";
+import BusinessCard from "@/components/BusinessCard";
 
 export default function PestControlOttawaPage() {
   return (
