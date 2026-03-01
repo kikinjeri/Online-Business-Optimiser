@@ -1,54 +1,68 @@
+// app/about/page.tsx
+
 import Link from "next/link";
 import Image from "next/image";
 
 export default function AboutPage() {
   return (
-    <div className="container">
-      {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="nav-left">
-          <Link href="/">OBO</Link>
-        </div>
+    <main className="about-page">
+      {/* GLOBAL HEADER */}
+      <header className="global-header">
+        <Link href="/" className="header-logo">
+         OBO
+        </Link>
 
-        <div className="nav-right">
+        <nav className="header-nav">
           <Link href="/">Home</Link>
-          <Link href="/business">Business</Link>
-          <Link href="/about">About</Link>
+          <Link href="/business">Businesses</Link>
+        </nav>
+      </header>
+
+      {/* HERO */}
+      <section className="about-hero">
+        <div className="about-intro">
+          <h1>Our Mission</h1>
+          <p className="about-tagline">
+            Support local businesses by creating an accessible, search‑ready platforms where they can easily be found.
+          </p>
         </div>
-      </nav>
-
-      {/* ABOUT CONTENT */}
-      <section>
-        <h1 className="hero-title">About OBO</h1>
-
-        <p className="hero-subtitle">
-          OBO is a premium platform designed to help local service businesses
-          present their information in a clean, structured format that search
-          engines understand — and customers can find.
-        </p>
-
-        <p className="hero-subtitle" style={{ marginTop: "2rem" }}>
-          Every page is built with clarity, performance, and real‑world
-          usability in mind. The goal is simple: make local businesses visible,
-          accessible, and trustworthy online.
-        </p>
       </section>
 
-      {/* IMAGE */}
-      <section>
-        <Image
-          src="/images/two.jpg"
-          alt="Portrait"
-          width={260}
-          height={260}
-          className="about-image"
-        />
+      {/* CORE EXPLANATION */}
+      <section className="about-content">
+        <p>
+          OBO creates clean, semantic HTML pages for every business — the same
+          structure Google prefers when indexing local services. This gives each
+          business a fast, lightweight presence that loads instantly and works
+          everywhere.
+        </p>
+
+        <p>
+          Every page is built with accessibility in mind: readable typography,
+          proper headings, alt text, and keyboard‑friendly navigation. This
+          ensures that all customers — including those using assistive
+          technologies — can access your business information.
+        </p>
+
+        <p>
+          OBO improves Google visibility by presenting business details in a
+          structured, machine‑readable format. Search engines can understand
+          your services, location, and contact information more clearly, which
+          increases impressions and ranking opportunities.
+        </p>
+
+        <p>
+          Each business page can be embedded anywhere — websites, blogs,
+          newsletters, directories, or partner pages. This makes your business
+          more discoverable and allows your information to travel beyond a
+          single platform.
+        </p>
       </section>
 
       {/* FOOTER */}
       <footer className="footer">
-        © {new Date().getFullYear()} Online Business Optimiser.
+        © {new Date().getFullYear()} OBO — Online Business Optimiser
       </footer>
-    </div>
+    </main>
   );
 }
