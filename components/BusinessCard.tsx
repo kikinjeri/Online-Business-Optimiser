@@ -1,6 +1,20 @@
 // components/BusinessCard.tsx
 import Link from "next/link";
 
+type Service = {
+  id?: string | number | null;
+  name_en: string;
+};
+
+type BusinessCardProps = {
+  name: string;
+  tagline?: string | null;
+  phone?: string | null;
+  address?: string | null;
+  slug: string;
+  services?: Service[];
+};
+
 export default function BusinessCard({
   name,
   tagline,
@@ -8,7 +22,7 @@ export default function BusinessCard({
   address,
   slug,
   services = [],
-}) {
+}: BusinessCardProps) {
   return (
     <div
       role="region"
@@ -39,7 +53,7 @@ export default function BusinessCard({
         )}
       </header>
 
-      {services.length > 0 && (
+      {Array.isArray(services) && services.length > 0 && (
         <ul
           style={{
             margin: "0 0 12px 0",
@@ -49,8 +63,8 @@ export default function BusinessCard({
             lineHeight: 1.5,
           }}
         >
-          {services.map((service) => (
-            <li key={service.id}>{service.name_en}</li>
+          {services.map((service, index) => (
+            <li key={index}>{service.name_en}</li>
           ))}
         </ul>
       )}

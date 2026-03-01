@@ -1,5 +1,5 @@
 /* ==========================================================
-   GLOBAL BRAND SYSTEM — BUSINESS WEBSITE OPTIMISER
+   BUSINESS WEBSITE OPTIMISER — GLOBAL BRAND SYSTEM
    Bold • Accessible • Premium • High‑Contrast
 ========================================================== */
 
@@ -21,6 +21,10 @@
   --obo-transition: 0.25s ease;
 }
 
+/* ==========================================================
+   GLOBAL RESET + BASE
+========================================================== */
+
 html, body {
   margin: 0;
   padding: 0;
@@ -31,17 +35,17 @@ html, body {
 }
 
 /* ==========================================================
-   GLOBAL NAVBAR
+   NAVBAR
 ========================================================== */
 
 .navbar {
   background: var(--obo-bg-soft);
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   padding: 1rem 2rem;
   position: sticky;
   top: 0;
-  z-index: 50;
   width: 100%;
+  z-index: 50;
 }
 
 .nav-inner {
@@ -53,9 +57,9 @@ html, body {
 }
 
 .nav-logo {
+  color: var(--obo-text);
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--obo-text);
   text-decoration: none;
 }
 
@@ -82,8 +86,8 @@ html, body {
 .cta-secondary {
   padding: 0.75rem 1.25rem;
   border-radius: var(--obo-radius);
-  text-decoration: none;
   font-weight: 600;
+  text-decoration: none;
   transition: var(--obo-transition);
 }
 
@@ -106,7 +110,7 @@ html, body {
 }
 
 /* ==========================================================
-   GLOBAL FOOTER
+   FOOTER
 ========================================================== */
 
 .footer {
@@ -114,78 +118,35 @@ html, body {
   padding: 2rem;
   color: var(--obo-text-soft);
   font-size: 0.9rem;
-  border-top: 1px solid #222;
+  border-top: 1px solid rgba(255,255,255,0.08);
   margin-top: 4rem;
 }
-/* DIRECTORY PAGE WRAPPER */
+
+/* ==========================================================
+   DIRECTORY PAGE — WRAPPER + TITLE
+========================================================== */
+
 .business-directory {
   padding-bottom: 60px;
 }
 
-/* PAGE TITLE */
 .directory-title {
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
   margin: 40px 0 20px;
-  color: #f5f7fa;
+  color: var(--obo-text);
+  position: sticky;
+  top: 60px; /* below navbar */
+  background: var(--obo-bg);
+  padding: 20px 0;
+  z-index: 40;
 }
 
-/* GRID LAYOUT */
-.directory-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 32px;
-  padding: 20px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
+/* ==========================================================
+   DIRECTORY — VERTICAL LIST (HIGH‑DENSITY)
+========================================================== */
 
-/* BUSINESS CARD */
-.directory-card {
-  display: block;
-  background: #0b0d10;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
-  padding: 24px;
-  text-decoration: none;
-  color: #f5f7fa;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.directory-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.55);
-}
-
-/* CARD CONTENT */
-.card-name {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin: 0 0 6px;
-}
-
-.card-tagline {
-  font-size: 0.95rem;
-  color: #c7cbd1;
-  margin: 0 0 12px;
-}
-
-.card-address {
-  font-size: 0.9rem;
-  color: #9ba0aa;
-  margin-bottom: 12px;
-}
-
-.card-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 0.85rem;
-  color: #4f8cff;
-}
-/* VERTICAL DIRECTORY LIST */
 .directory-list {
   max-width: 1400px;
   margin: 0 auto;
@@ -193,9 +154,31 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  /* Scrollable list */
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  padding-right: 8px;
 }
 
-/* EACH ROW */
+/* Scrollbar styling */
+.directory-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.directory-list::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 4px;
+}
+
+.directory-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* ==========================================================
+   DIRECTORY — ROW STYLE
+========================================================== */
+
 .directory-row {
   display: grid;
   grid-template-columns: 2fr 3fr 1fr 2fr 1fr auto;
@@ -203,12 +186,12 @@ html, body {
   gap: 16px;
 
   padding: 16px 20px;
-  background: #0b0d10;
+  background: var(--obo-bg-card);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
+  border-radius: var(--obo-radius);
 
   text-decoration: none;
-  color: #f5f7fa;
+  color: var(--obo-text);
 
   transition: background 0.2s ease, transform 0.2s ease;
 }
@@ -218,14 +201,17 @@ html, body {
   transform: translateX(4px);
 }
 
-/* TEXT STYLES */
+/* ==========================================================
+   DIRECTORY — TEXT COLUMNS
+========================================================== */
+
 .row-name {
   font-weight: 600;
   font-size: 1rem;
 }
 
 .row-tagline {
-  color: #c7cbd1;
+  color: var(--obo-text-soft);
   font-size: 0.9rem;
 }
 
@@ -238,11 +224,14 @@ html, body {
 
 .row-view {
   font-weight: 600;
-  color: #4f8cff;
+  color: var(--obo-accent);
   font-size: 0.9rem;
 }
 
-/* RESPONSIVE */
+/* ==========================================================
+   RESPONSIVE BEHAVIOUR
+========================================================== */
+
 @media (max-width: 900px) {
   .directory-row {
     grid-template-columns: 2fr 2fr 1fr auto;
@@ -266,4 +255,27 @@ html, body {
   .row-city {
     display: none;
   }
+}
+/* ==========================================================
+   ABOUT PAGE — TRUST BADGES
+========================================================== */
+
+.about-badges {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.badge {
+  background: var(--obo-bg-card);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 10px 16px;
+  border-radius: var(--obo-radius);
+  font-size: 0.9rem;
+  color: var(--obo-text);
+  box-shadow: var(--obo-shadow);
 }
