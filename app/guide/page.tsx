@@ -1,159 +1,132 @@
 // app/guide/page.tsx
-import React from "react";
+import Link from "next/link";
 
 export const metadata = {
-  title: "Guide: Using Your Business Profile Link & Embed Code",
+  title: "Guide | Business Profile Link & Embed Code",
   description:
-    "A clear guide for business owners explaining how links and embed codes support visibility, consistency, accessibility, and online presence.",
+    "A concise guide explaining how your business profile link and embed code support visibility, consistency, and accessibility.",
 };
 
 export default function GuidePage() {
   return (
-    <main className="max-w-3xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-bold tracking-tight mb-4">
-        Guide: Using Your Business Profile Link & Embed Code
+    <main className="max-w-2xl mx-auto px-5 py-12">
+      {/* NAVBAR */}
+      <nav className="navbar" role="navigation" aria-label="Main">
+        <div className="nav-inner">
+          <Link href="/" className="nav-logo">
+            Business Website Optimiser
+          </Link>
+
+          <div className="nav-links">
+            <Link href="/">Home</Link>
+            <Link href="/">Guide</Link>
+            <Link href="/business">Businesses</Link>
+            <Link href="/about">About</Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* WELCOME */}
+      <h1 className="text-xl font-semibold tracking-tight mb-3">
+        Welcome to Business Website Optimiser
       </h1>
 
-      <p className="text-gray-600 mb-10 leading-relaxed">
-        This guide explains what your profile link and embed code are, how they
-        support your online presence, and where you can use them to strengthen
-        visibility, consistency, and accessibility across the web.
+      <p className="text-gray-700 text-[0.9rem] leading-relaxed mb-8">
+        This short guide explains how to use your business profile link and
+        embed code. These tools help strengthen your online presence by keeping
+        your information consistent, accessible, and easy for both customers and
+        search engines to understand. They are designed to complement your
+        existing website and marketing efforts, making it easier for people to
+        find accurate, up‑to‑date details about your business wherever they
+        look.
       </p>
 
       {/* WHAT THEY ARE */}
-      <section className="mb-12">
-        <h2 className="text-xl font-semibold mb-3">
-          What Your Link and Embed Code Are
-        </h2>
+      <h2 className="text-[1.05rem] font-medium mb-2">
+        What Your Link and Embed Code Are
+      </h2>
 
-        <p className="mb-4">
-          You receive two simple tools designed to help customers find accurate,
-          up‑to‑date information about your business wherever they look:
-        </p>
-
-        <ul className="list-disc pl-6 space-y-2 text-gray-700">
-          <li>
-            <strong>Your Profile Link:</strong> A direct link to your structured
-            business profile — a clear, accessible page that presents your
-            services, hours, contact details, and location.
-          </li>
-          <li>
-            <strong>Your Embed Code:</strong> A small snippet you can paste into
-            your existing website to display your business card or services
-            directly on your site. It updates automatically whenever your
-            information changes.
-          </li>
-        </ul>
-      </section>
+      <p className="text-gray-700 text-[0.9rem] leading-relaxed mb-6">
+        Your profile link directs customers to a structured business page that
+        presents your services, hours, contact information, and location in a
+        clear and accessible format. Your embed code is a small snippet you can
+        add to your existing website to display your business card or services
+        directly on your site. It updates automatically whenever your
+        information changes, ensuring your website always reflects the most
+        current details without requiring extra maintenance.
+      </p>
 
       {/* BENEFITS */}
-      <section className="mb-12">
-        <h2 className="text-xl font-semibold mb-3">
-          How These Tools Support Your Online Presence
-        </h2>
+      <h2 className="text-[1.05rem] font-medium mb-2">
+        How These Tools Support Your Online Presence
+      </h2>
 
-        <ul className="list-disc pl-6 space-y-3 text-gray-700">
-          <li>
-            <strong>Consistent information everywhere:</strong> Your link and
-            embed code help ensure customers see the same accurate details
-            across your website, social media, Google Business Profile, and
-            directories.
-          </li>
+      <p className="text-gray-700 text-[0.9rem] leading-relaxed mb-6">
+        Using your link and embed code helps maintain consistency across the
+        web. When customers see the same information on your website, social
+        media, Google Business Profile, and local directories, it builds trust
+        and reduces confusion. These tools also create clearer signals for
+        search engines. When your profile link appears in multiple trusted
+        places, it helps Google confirm your business details and understand
+        what you offer, which can strengthen your visibility in local search
+        results. Your profile page is also built with accessibility in mind,
+        making it easier for customers on all devices and assistive technologies
+        to read and navigate your information.
+      </p>
 
-          <li>
-            <strong>Clear signals for Google:</strong> When your profile link
-            appears in multiple trusted places, it helps Google connect your
-            business name, services, and location. This strengthens your local
-            search presence over time.
-          </li>
+      {/* WHERE TO USE LINK */}
+      <h2 className="text-[1.05rem] font-medium mb-2">
+        Where You Can Use Your Profile Link
+      </h2>
 
-          <li>
-            <strong>Improved accessibility:</strong> Your profile page is built
-            to be readable on all devices and by assistive technologies,
-            supporting a wider range of customers and improving overall user
-            experience.
-          </li>
-
-          <li>
-            <strong>Always up‑to‑date:</strong> If your hours, services, or
-            contact details change, your embedded card and your link update
-            automatically. You only update your information once.
-          </li>
-        </ul>
-      </section>
-
-      {/* WHERE TO USE */}
-      <section className="mb-12">
-        <h2 className="text-xl font-semibold mb-3">
-          Where You Can Use Your Profile Link
-        </h2>
-
-        <p className="mb-4">
-          Your link can be placed anywhere customers look for information about
-          your business:
-        </p>
-
-        <ul className="list-disc pl-6 space-y-2 text-gray-700">
-          <li>Google Business Profile (Website, Services, Menu, Learn More)</li>
-          <li>Instagram bio</li>
-          <li>Facebook page</li>
-          <li>LinkedIn company page</li>
-          <li>Email signatures</li>
-          <li>QR codes on print materials</li>
-          <li>Local directories</li>
-          <li>Online ads or promotions</li>
-        </ul>
-      </section>
+      <p className="text-gray-700 text-[0.9rem] leading-relaxed mb-6">
+        Your profile link can be added anywhere customers look for information
+        about your business. Many businesses include it on their Google Business
+        Profile as their website, services link, or “Learn More” link. It also
+        works well in an Instagram bio, on a Facebook page, on a LinkedIn
+        company profile, or in an email signature. You can include it in QR
+        codes on printed materials, add it to local directories, or use it in
+        online ads and promotions. Wherever it appears, customers are taken to a
+        clear, reliable page that presents your information consistently.
+      </p>
 
       {/* EMBED CODE */}
-      <section className="mb-12">
-        <h2 className="text-xl font-semibold mb-3">
-          Where You Can Use Your Embed Code
-        </h2>
+      <h2 className="text-[1.05rem] font-medium mb-2">
+        Where You Can Use Your Embed Code
+      </h2>
 
-        <p className="mb-4">
-          If you have a website, you can embed your business card or services
-          list directly into your pages. This helps maintain consistency and
-          ensures customers always see the most accurate information.
-        </p>
+      <p className="text-gray-700 text-[0.9rem] leading-relaxed mb-4">
+        If you have a website, you can embed your business card or services list
+        directly into your pages. This helps maintain consistency and ensures
+        customers always see the most accurate information. The embed code works
+        with most website builders and can be placed wherever you want your
+        business details to appear.
+      </p>
 
-        <p className="text-sm font-mono bg-gray-900 text-gray-100 p-4 rounded-md overflow-x-auto mb-4">
-          {`<iframe
+      <p className="text-xs font-mono bg-gray-900 text-gray-100 p-4 rounded-md overflow-x-auto mb-8">
+        {`<iframe
   src="https://yourdomain.com/business/your-slug"
   title="Your Business Profile"
   loading="lazy"
   style="border:0; width:100%; max-width:480px; height:420px; border-radius:12px;"
 ></iframe>`}
-        </p>
+      </p>
 
-        <p className="text-gray-700">
-          The embed code works with most website builders. Simply paste it where
-          you want your business card or services to appear.
-        </p>
-      </section>
+      {/* CONCLUSION */}
+      <h2 className="text-[1.05rem] font-medium mb-2">Thank You</h2>
 
-      {/* SUMMARY */}
-      <section className="mb-12">
-        <h2 className="text-xl font-semibold mb-3">
-          What This Means for Your Business
-        </h2>
+      <p className="text-gray-700 text-[0.9rem] leading-relaxed mb-12">
+        Thank you for taking the time to review this guide. If you have any
+        questions or would like help using your link or embed code, please feel
+        free to{" "}
+        <Link href="/about" className="underline">
+          contact me
+        </Link>
+        . I’m always happy to assist.
+      </p>
 
-        <p className="mb-4">
-          Using your link and embed code helps your business present clear,
-          consistent, accessible information across the web. This supports:
-        </p>
-
-        <ul className="list-disc pl-6 space-y-2 text-gray-700">
-          <li>Stronger visibility in local search</li>
-          <li>Improved customer trust and clarity</li>
-          <li>Less time spent updating multiple platforms</li>
-          <li>A more unified and professional online presence</li>
-        </ul>
-      </section>
-
-      <footer className="text-sm text-gray-500 border-t pt-6">
+      <footer className="text-xs text-gray-500 border-t pt-6">
         <p>This guide is designed to be accessible and easy to read.</p>
-        <p>Clear structure helps both customers and search engines.</p>
       </footer>
     </main>
   );
