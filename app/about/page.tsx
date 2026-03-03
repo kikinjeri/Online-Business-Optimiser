@@ -3,9 +3,9 @@ import Link from "next/link";
 
 export default function AboutPage() {
   return (
-    <main className="about-page">
-      {/* NAVBAR */}
-      <nav className="navbar" role="navigation" aria-label="Main">
+    <main className="page-shell">
+      {/* NAVBAR — consistent across app */}
+      <nav className="site-navbar" role="navigation" aria-label="Main">
         <div className="nav-inner">
           <Link href="/" className="nav-logo">
             Business Website Optimiser
@@ -13,61 +13,61 @@ export default function AboutPage() {
 
           <div className="nav-links">
             <Link href="/">Home</Link>
-            <Link href="/">Guide</Link>
+            <Link href="/guide">Guide</Link>
             <Link href="/business">Businesses</Link>
             <Link href="/about">About</Link>
           </div>
         </div>
       </nav>
 
-      {/* HERO */}
-      <header className="about-hero">
-        <h1>About Business Website Optimiser</h1>
-        <p className="about-tagline">
-          We help local businesses get more website traffic by improving how
-          they appear on Google and how easily customers can find them.
-        </p>
-      </header>
+      <div className="page-container">
+        {/* TITLE */}
+        <h1 className="page-title">About Us</h1>
 
-      {/* CONTENT */}
-      <section className="about-content">
-        <h2>Increase Website Traffic</h2>
-        <p>
-          When your business information is clear, consistent, and easy for
-          search engines to read, you show up more often in local search
-          results. More visibility means more clicks, more calls, and more
-          customers.
+        <p className="page-intro">
+          We’re a small team of web developers who care about clean, accessible
+          design and helping local businesses connect with more people. Our goal
+          is to make it easier for business owners to share accurate, up‑to‑date
+          information everywhere customers look.
         </p>
 
-        <h2>Optimised for Google</h2>
-        <p>
-          Our pages use clean headings, structured content, and fast
-          performance. This helps Google understand exactly what your business
-          offers and where you operate, which improves your ranking over time.
-        </p>
+        <section className="guide-section">
+          <h2 className="section-title">What We Do</h2>
+          <p className="section-text">
+            Business Website Optimiser provides simple tools that help you keep
+            your business information consistent across the web. Your Business
+            Profile and Embed Code work together to present your services,
+            hours, and contact details in a clear, trustworthy format that’s
+            easy for customers — and search engines — to understand.
+          </p>
+        </section>
 
-        <h2>Accessibility Boosts Searchability</h2>
-        <p>
-          Accessible pages aren’t just better for people — they’re better for
-          search engines. Clear text, proper labels, readable contrast, and
-          screen‑reader‑friendly structure make your content easier for Google
-          to scan and index. When your page is easier to read, it’s easier to
-          rank.
-        </p>
+        <section className="guide-section">
+          <h2 className="section-title">Why It Matters</h2>
+          <p className="section-text">
+            Clear, consistent information builds trust and improves visibility.
+            When customers can quickly understand what you offer and how to
+            reach you, they’re more likely to get in touch. When search engines
+            can read your content easily, your business becomes easier to find.
+          </p>
+        </section>
 
-        <h2>Easy for Customers to Navigate</h2>
-        <p>
-          Customers can quickly see your services, service areas, and contact
-          details without digging through cluttered layouts. A clean,
-          trustworthy design helps people reach out faster and increases
-          conversions.
-        </p>
-      </section>
+        <section className="guide-section">
+          <h2 className="section-title">Get in Touch</h2>
+          <p className="section-text">
+            If you have questions, feedback, or ideas, we’d love to hear from
+            you. You can reach out anytime through the{" "}
+            <Link href="/guide" className="underline">
+              Guide
+            </Link>{" "}
+            or by exploring your business profile tools.
+          </p>
+        </section>
 
-      {/* FOOTER */}
-      <footer className="footer">
-        © {new Date().getFullYear()} Business Website Optimiser
-      </footer>
+        <footer className="guide-footer">
+          <p>© {new Date().getFullYear()} Business Website Optimiser</p>
+        </footer>
+      </div>
     </main>
   );
 }

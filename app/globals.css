@@ -1,40 +1,58 @@
 /* ==========================================================
    BUSINESS WEBSITE OPTIMISER — GLOBAL BRAND SYSTEM
-   Bold • Accessible • Premium • High‑Contrast
+   Dark + Light Theme • Accessible • Premium
 ========================================================== */
 
+/* ==========================================================
+   THEME VARIABLES — DARK MODE (DEFAULT)
+========================================================== */
 :root {
-  /* Dark Brand Surfaces */
-  --obo-bg: #0d0f12;
-  --obo-bg-soft: #16181d;
-  --obo-bg-card: #1c1f24;
+  /* Surfaces */
+  --bg: #0d0f12;
+  --bg-soft: #16181d;
+  --bg-card: #1c1f24;
 
-  /* Dark Text */
-  --obo-text: #f5f7fa;
-  --obo-text-soft: #c7cbd1;
+  /* Text */
+  --text: #f5f7fa;
+  --text-soft: #c7cbd1;
 
   /* Accent */
-  --obo-accent: #4f8cff;
-  --obo-accent-soft: #3a6cd6;
+  --accent: #4f8cff;
+  --accent-hover: #3a6cd6;
 
-  /* Shared Layout + Effects */
-  --obo-radius: 12px;
-  --obo-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-  --obo-transition: 0.25s ease;
+  /* Layout */
+  --radius: 12px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --transition: 0.25s ease;
 
-  /* Light Surfaces (Business pages, cards, menus) */
-  --obo-light-bg: #fdfdfd;
-  --obo-light-surface: #ffffff;
-  --obo-light-surface-soft: #f5f5f5;
-  --obo-light-border: #e5e5e5;
+  /* Typography scale */
+  --font-xl: 2.75rem;
+  --font-lg: 1.75rem;
+  --font-md: 1.25rem;
+  --font-base: 1rem;
+  --font-sm: 0.9rem;
+}
 
-  /* Light Text */
-  --obo-light-text: #222222;
-  --obo-light-text-soft: #555555;
-  --obo-light-text-muted: #666666;
+/* ==========================================================
+   THEME VARIABLES — LIGHT MODE
+========================================================== */
+[data-theme="light"] {
+  --bg: #ffffff;
+  --bg-soft: #f5f5f5;
+  --bg-card: #ffffff;
 
-  /* Light Accent */
-  --obo-light-accent: #2a6df4;
+  --text: #1a1a1a;
+  --text-soft: #555555;
+
+  --accent: #2a6df4;
+  --accent-hover: #1f54c9;
+
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Smooth transitions */
+* {
+  transition: background var(--transition), color var(--transition), border var(--transition);
 }
 
 /* ==========================================================
@@ -45,20 +63,38 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: var(--obo-bg);
-  color: var(--obo-text);
+  background: var(--bg);
+  color: var(--text);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 /* ==========================================================
-   NAVBAR
+   GLOBAL PAGE LAYOUT
 ========================================================== */
 
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 0;
+  flex: 1;
+}
+
+/* ==========================================================
+   NAVBAR — UNIFIED + ALIGNED + TOGGLE BUTTON
+========================================================== */
+
+.site-navbar,
 .navbar {
-  background: var(--obo-bg-soft);
+  background: var(--bg-soft);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   position: sticky;
   top: 0;
   width: 100%;
@@ -66,7 +102,7 @@ body {
 }
 
 .nav-inner {
-  max-width: 1100px;
+  max-width: 800px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -74,7 +110,7 @@ body {
 }
 
 .nav-logo {
-  color: var(--obo-text);
+  color: var(--text);
   font-size: 1.25rem;
   font-weight: 600;
   text-decoration: none;
@@ -83,343 +119,78 @@ body {
 .nav-links {
   display: flex;
   gap: 1.5rem;
+  align-items: center;
 }
 
 .nav-links a {
-  color: var(--obo-text-soft);
+  color: var(--text-soft);
   text-decoration: none;
-  transition: var(--obo-transition);
+  font-size: var(--font-base);
 }
 
 .nav-links a:hover {
-  color: var(--obo-text);
+  color: var(--accent);
+  opacity: 0.9;
+}
+
+/* THEME TOGGLE BUTTON */
+.theme-toggle {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--text-soft);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
 }
 
 /* ==========================================================
-   CTA BUTTONS
+   FOOTER — PINNED + CLEAN
 ========================================================== */
 
-.cta-primary,
-.cta-secondary {
-  padding: 0.75rem 1.25rem;
-  border-radius: var(--obo-radius);
-  font-weight: 600;
-  text-decoration: none;
-  transition: var(--obo-transition);
-}
-
-.cta-primary {
-  background: var(--obo-accent);
-  color: #fff;
-}
-
-.cta-primary:hover {
-  background: var(--obo-accent-soft);
-}
-
-.cta-secondary {
-  background: var(--obo-bg-card);
-  color: var(--obo-text);
-}
-
-.cta-secondary:hover {
-  background: #2a2d33;
-}
-
-/* ==========================================================
-   FOOTER
-========================================================== */
-
-.footer {
+.page-footer {
   text-align: center;
   padding: 2rem;
-  color: var(--obo-text-soft);
-  font-size: 0.9rem;
+  color: var(--text-soft);
+  font-size: var(--font-sm);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  margin-top: 4rem;
+  margin-top: 3rem;
 }
 
 /* ==========================================================
-   DIRECTORY PAGE — WRAPPER + TITLE
+   TYPOGRAPHY — UNIFIED SCALE
 ========================================================== */
 
-.business-directory {
-  padding-bottom: 60px;
-}
-
-.directory-title {
-  text-align: center;
-  font-size: 2rem;
+.page-title {
+  font-size: var(--font-lg);
   font-weight: 700;
-  margin: 40px 0 20px;
-  color: var(--obo-text);
-  position: sticky;
-  top: 60px; /* below navbar */
-  background: var(--obo-bg);
-  padding: 20px 0;
-  z-index: 40;
+  margin-bottom: 1rem;
+}
+
+.page-intro,
+.section-text {
+  font-size: var(--font-base);
+  color: var(--text-soft);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
 /* ==========================================================
-   DIRECTORY — VERTICAL LIST (HIGH‑DENSITY)
+   RESPONSIVE IMPROVEMENTS
 ========================================================== */
-
-.directory-list {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  max-height: calc(100vh - 180px);
-  overflow-y: auto;
-  padding-right: 8px;
-}
-
-/* Scrollbar styling */
-.directory-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-.directory-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 4px;
-}
-
-.directory-list::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-/* ==========================================================
-   DIRECTORY — ROW STYLE
-========================================================== */
-
-.directory-row {
-  display: grid;
-  grid-template-columns: 2fr 3fr 1fr 2fr 1fr auto;
-  align-items: center;
-  gap: 16px;
-
-  padding: 16px 20px;
-  background: var(--obo-bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--obo-radius);
-
-  text-decoration: none;
-  color: var(--obo-text);
-
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.directory-row:hover {
-  background: #11141a;
-  transform: translateX(4px);
-}
-
-/* ==========================================================
-   DIRECTORY — TEXT COLUMNS
-========================================================== */
-
-.row-name {
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.row-tagline {
-  color: var(--obo-text-soft);
-  font-size: 0.9rem;
-}
-
-.row-phone,
-.row-website,
-.row-city {
-  font-size: 0.9rem;
-  color: var(--obo-text-soft);
-}
-
-.row-view {
-  font-weight: 600;
-  color: var(--obo-accent);
-  font-size: 0.9rem;
-}
-
-/* ==========================================================
-   RESPONSIVE BEHAVIOUR
-========================================================== */
-
-@media (max-width: 900px) {
-  .directory-row {
-    grid-template-columns: 2fr 2fr 1fr auto;
-  }
-
-  .row-website,
-  .row-city {
-    display: none;
-  }
-}
 
 @media (max-width: 600px) {
-  .directory-row {
-    grid-template-columns: 1fr auto;
-    gap: 8px;
+  .page-container {
+    padding: 1.5rem 1rem 0;
   }
 
-  .row-tagline,
-  .row-phone,
-  .row-website,
-  .row-city {
-    display: none;
+  .nav-links {
+    gap: 1rem;
   }
-}
 
-/* ==========================================================
-   ABOUT PAGE — TRUST BADGES
-========================================================== */
-
-.about-badges {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-}
-
-.badge {
-  background: var(--obo-bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 10px 16px;
-  border-radius: var(--obo-radius);
-  font-size: 0.9rem;
-  color: var(--obo-text);
-  box-shadow: var(--obo-shadow);
-}
-
-/* ==========================================================
-   BUSINESS PAGE — LIGHT SURFACE WRAPPER
-========================================================== */
-
-.business-page {
-  padding: 40px 0;
-  background: var(--obo-light-bg);
-}
-
-.container {
-  max-width: 1150px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.business-header h1 {
-  font-size: 2.6rem;
-  font-weight: 700;
-  margin-bottom: 6px;
-  color: var(--obo-light-text);
-}
-
-.business-header .tagline {
-  font-size: 1.25rem;
-  color: var(--obo-light-text-muted);
-  margin-bottom: 24px;
-}
-
-.website-link {
-  display: inline-block;
-  margin-bottom: 24px;
-  font-weight: 600;
-  color: var(--obo-light-accent);
-  text-decoration: none;
-}
-
-.website-link:hover {
-  text-decoration: underline;
-}
-
-.business-card-section {
-  margin-bottom: 40px;
-}
-
-/* MAP */
-.map-section {
-  margin-bottom: 48px;
-}
-
-.map-section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 16px;
-  color: var(--obo-light-text);
-}
-
-/* Menu-style sections */
-.menu-section {
-  margin-bottom: 48px;
-}
-
-.menu-section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  border-bottom: 2px solid var(--obo-light-border);
-  padding-bottom: 8px;
-  color: var(--obo-light-text);
-}
-
-.menu-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.menu-item {
-  background: var(--obo-light-surface);
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid var(--obo-light-border);
-}
-
-.menu-item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.menu-item-header strong {
-  font-size: 1.2rem;
-  color: var(--obo-light-text);
-}
-
-.price {
-  font-weight: 600;
-  color: var(--obo-light-text-soft);
-}
-
-.description {
-  margin-top: 8px;
-  color: var(--obo-light-text-soft);
-  line-height: 1.5;
-}
-
-.area-list {
-  columns: 2;
-  column-gap: 40px;
-  list-style: none;
-  padding: 0;
-}
-
-.area-list li {
-  margin-bottom: 8px;
-  color: var(--obo-light-text-soft);
-}
-
-/* BUSINESS PAGE WRAPPER — SAFE, NEUTRAL, NON-DARK-MODE */
-.business-page-wrapper {
-  background: var(--obo-light-bg);
-  padding: 40px 0;
-}
-
-.business-page-wrapper .container {
-  max-width: 1150px;
-  margin: 0 auto;
-  padding: 0 24px;
+  .page-title {
+    font-size: 1.5rem;
+  }
 }

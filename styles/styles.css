@@ -9,19 +9,19 @@
 }
 
 .app-hero-title {
-  font-size: 2.75rem;
+  font-size: var(--font-xl);
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
 
 .app-hero-title .accent {
-  color: var(--obo-accent);
+  color: var(--accent);
 }
 
 .app-hero-subtitle {
-  font-size: 1.2rem;
-  color: var(--obo-text-soft);
+  font-size: var(--font-md);
+  color: var(--text-soft);
   max-width: 650px;
   margin-bottom: 2rem;
 }
@@ -43,26 +43,26 @@
 }
 
 .preview-card {
-  background: var(--obo-bg-card);
+  background: var(--bg-card);
   padding: 1.5rem;
-  border-radius: var(--obo-radius);
-  box-shadow: var(--obo-shadow);
-  transition: var(--obo-transition);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
 }
 
 .preview-card:hover {
   transform: translateY(-4px);
-  background: var(--obo-bg-soft);
+  background: var(--bg-soft);
 }
 
 .preview-card h3 {
   margin: 0 0 0.5rem 0;
-  font-size: 1.15rem;
+  font-size: var(--font-md);
 }
 
 .preview-card p {
   margin: 0;
-  color: var(--obo-text-soft);
+  color: var(--text-soft);
 }
 
 /* ==========================================================
@@ -76,7 +76,7 @@
 }
 
 .section-title {
-  font-size: 1.75rem;
+  font-size: var(--font-lg);
   margin-bottom: 1.5rem;
 }
 
@@ -89,25 +89,26 @@
 
 .row-card {
   min-width: 260px;
-  background: var(--obo-bg-card);
+  background: var(--bg-card);
   padding: 1.25rem;
-  border-radius: var(--obo-radius);
-  box-shadow: var(--obo-shadow);
-  transition: var(--obo-transition);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
 }
 
 .row-card:hover {
   transform: translateY(-4px);
-  background: var(--obo-bg-soft);
+  background: var(--bg-soft);
 }
 
 .row-card h3 {
   margin: 0 0 0.5rem 0;
+  font-size: var(--font-md);
 }
 
 .row-card p {
   margin: 0;
-  color: var(--obo-text-soft);
+  color: var(--text-soft);
 }
 
 /* ==========================================================
@@ -121,12 +122,12 @@
 }
 
 .accessibility-section h2 {
-  font-size: 1.75rem;
+  font-size: var(--font-lg);
   margin-bottom: 1rem;
 }
 
 .accessibility-section p {
-  color: var(--obo-text-soft);
+  color: var(--text-soft);
   line-height: 1.6;
 }
 
@@ -140,18 +141,14 @@
   padding: 40px 20px;
 }
 
-.about-hero {
-  margin-bottom: 40px;
-}
-
 .about-intro h1 {
-  font-size: 2rem;
-  margin: 0 0 8px 0;
+  font-size: var(--font-lg);
+  margin-bottom: 0.5rem;
 }
 
 .about-tagline {
-  color: var(--obo-text-soft);
-  font-size: 1.1rem;
+  color: var(--text-soft);
+  font-size: var(--font-md);
 }
 
 .about-content {
@@ -162,65 +159,308 @@
 }
 
 .about-content p {
-  color: var(--obo-text-soft);
+  color: var(--text-soft);
   line-height: 1.6;
 }
 
 .about-benefits h2 {
-  font-size: 1.5rem;
+  font-size: var(--font-md);
   margin-bottom: 16px;
 }
 
 .about-benefits li {
   margin-bottom: 12px;
-  color: var(--obo-text-soft);
+  color: var(--text-soft);
 }
+.about-badges {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap; /* keeps it responsive */
+}
+.about-badges .badge {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.about-badges .badge:nth-child(2) { animation-delay: 0.05s; }
+.about-badges .badge:nth-child(3) { animation-delay: 0.1s; }
+.about-badges .badge:nth-child(4) { animation-delay: 0.15s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 /* ==========================================================
-   BUSINESS DIRECTORY PAGE (LEGACY SAFE STYLES)
+   BUSINESS DIRECTORY — SIMPLE LIST
 ========================================================== */
-
-.directory-page {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
-
-.business-title {
-  font-size: 1.6rem;
-  font-weight: 600;
-  margin-bottom: 24px;
-}
 
 .business-list {
   display: flex;
   flex-direction: column;
+  gap: 0.75rem;
 }
 
-.business-line {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 24px;
-  padding: 10px 0;
-  border-bottom: 1px solid #2a2d33;
-  font-size: 0.95rem;
-  align-items: center;
-}
-
-.line-name {
-  font-weight: 500;
-}
-
-.line-phone,
-.line-email,
-.line-website {
-  color: var(--obo-accent);
+.business-link {
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: var(--accent);
   text-decoration: none;
-  font-weight: 500;
 }
 
-.line-phone:hover,
-.line-email:hover,
-.line-website:hover {
+.business-link:hover {
   text-decoration: underline;
+}
+
+/* ==========================================================
+   BUSINESS CARD — PREMIUM UPGRADE
+========================================================== */
+
+.business-card {
+  background: linear-gradient(to bottom right, var(--bg-card), var(--bg-soft));
+  color: var(--text);
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  max-width: 760px;
+  margin: 0 auto;
+  transition: var(--transition);
+}
+
+@media (hover: hover) {
+  .business-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* Header */
+.business-card-header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.business-card-title {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.business-card-tagline {
+  margin: 6px 0 0;
+  font-size: 1rem;
+  color: var(--text-soft);
+}
+
+/* Info Grid */
+.business-card-info-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
+  gap: 24px;
+}
+
+.business-card-info-item {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.business-card-label {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.business-card-link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.business-card-link:hover {
+  color: var(--accent-hover);
+}
+
+/* Hours */
+.business-card-hours-title {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.business-card-hours-list {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 12px;
+  row-gap: 4px;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.business-card-hours-row dt {
+  font-weight: 600;
+}
+
+.business-card-hours-row dd {
+  margin: 0;
+}
+
+/* Open/Closed Badges */
+.business-card-open {
+  margin-left: 8px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(22, 163, 74, 0.15);
+  color: #16a34a;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.business-card-closed {
+  margin-left: 8px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(220, 38, 38, 0.15);
+  color: #dc2626;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* Sections */
+.business-card-section {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+.business-card-section::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+}
+
+.business-card-section-title {
+  margin: 0 0 14px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Services Grid */
+.business-card-services-grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px 16px;
+}
+
+.business-card-service-tag {
+  background: var(--bg-soft);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: var(--text);
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: var(--transition);
+}
+
+.business-card-service-tag:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* More services */
+.business-card-more-services {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Map */
+.business-card-map {
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.business-card-map-link {
+  margin-top: 12px;
+  display: inline-block;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.business-card-map-link:hover {
+  color: var(--accent-hover);
+}
+
+/* Footer Tags */
+.business-card-footer {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+
+.business-card-footer-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .business-card-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE IMPROVEMENTS
+========================================================== */
+
+@media (max-width: 600px) {
+  .app-hero-title {
+    font-size: 2rem;
+  }
+
+  .app-hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .feature-rows {
+    padding: 0 1rem;
+  }
 }

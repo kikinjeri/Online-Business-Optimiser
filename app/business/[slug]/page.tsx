@@ -12,7 +12,7 @@ export default async function BusinessPage({
 
   const supabase = await supabaseServer();
 
-  // Fetch business
+  // 1. Fetch business by slug
   const { data: business, error: businessError } = await supabase
     .from("businesses")
     .select("*")
@@ -29,15 +29,18 @@ export default async function BusinessPage({
     );
   }
 
-  // Fetch services
+  // 2. Fetch services for this business
   const { data: servicesRaw } = await supabase
     .from("services")
     .select("id, name_en, description_en, starting_price")
     .eq("business_id", business.id);
 
-  const services = servicesRaw ?? [];
+  // Normalize services into string[]
+  const services = Array.isArray(servicesRaw)
+    ? servicesRaw.map((s) => s.name_en)
+    : [];
 
-  // Fetch service areas
+  // 3. Fetch service areas
   const { data: areasRaw } = await supabase
     .from("service_areas")
     .select("id, area_name")
@@ -45,17 +48,17 @@ export default async function BusinessPage({
 
   const areas = areasRaw ?? [];
 
-  // Hours JSON
+  // 4. Hours JSON
   const hours = business.hours_json || null;
 
-  // Extract neighbourhood
+  // 5. Extract neighbourhood from address
   const neighborhood = business.address
     ?.split(",")[1]
     ?.trim()
     ?.replace("Ottawa", "")
     ?.trim();
 
-  // Theme colors
+  // 6. Theme colors (fallbacks preserved)
   const theme = {
     primary: business.theme_primary || "#111827",
     accent: business.theme_accent || "#2563eb",
@@ -64,18 +67,13 @@ export default async function BusinessPage({
   };
 
   return (
-    <main className="business-page-wrapper" style={{ padding: "32px 0" }}>
+    <main className="business-page-wrapper" style={{ padding: "12px 0" }}>
       <div
         className="container"
         style={{ maxWidth: "900px", margin: "0 auto" }}
       >
         {/* Back navigation */}
-        <nav
-          aria-label="Back to directory"
-          style={{
-            marginBottom: "24px",
-          }}
-        >
+        <nav aria-label="Back to directory" style={{ marginBottom: "16px" }}>
           <Link
             href="/business"
             style={{
@@ -90,57 +88,6 @@ export default async function BusinessPage({
           </Link>
         </nav>
 
-        {/* Page hero */}
-        <header
-          className="business-header"
-          style={{
-            marginBottom: "28px",
-          }}
-        >
-          <h1
-            style={{
-              margin: 0,
-              fontSize: "2rem",
-              color: theme.primary,
-            }}
-          >
-            {business.name}
-          </h1>
-
-          {business.tagline_en && (
-            <p
-              className="tagline"
-              style={{
-                margin: "6px 0 0",
-                fontSize: "1.05rem",
-                color: `${theme.text}aa`,
-              }}
-            >
-              {business.tagline_en}
-            </p>
-          )}
-        </header>
-
-        {/* Website link */}
-        {business.website_url && (
-          <a
-            href={business.website_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="website-link"
-            style={{
-              display: "inline-block",
-              marginBottom: "24px",
-              color: theme.accent,
-              fontWeight: 600,
-              textDecoration: "none",
-              fontSize: "1rem",
-            }}
-          >
-            Visit website →
-          </a>
-        )}
-
         {/* Business card */}
         <section
           aria-label="Business overview"
@@ -153,17 +100,17 @@ export default async function BusinessPage({
             phone={business.phone}
             address={business.address}
             website_url={business.website_url}
-            services={services.map((s) => s.name_en)}
+            services={services}
             hours={hours}
             service_areas={areas.map((a) => a.area_name)}
             theme={theme}
             lat={business.lat}
             lng={business.lng}
             map_url={business.map_url}
+            neighborhood={neighborhood}
+            serviceAreasFull={areas.map((a) => a.area_name)}
           />
         </section>
-
-        {/* Map */}
 
         {/* Neighbourhood */}
         {neighborhood && (
@@ -212,7 +159,6 @@ export default async function BusinessPage({
               ))}
             </ul>
           </section>
-          
         )}
       </div>
     </main>

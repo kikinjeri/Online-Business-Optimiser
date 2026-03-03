@@ -1,4 +1,3 @@
-// components/BusinessCard.tsx
 import Link from "next/link";
 
 type BusinessCardProps = {
@@ -10,6 +9,8 @@ type BusinessCardProps = {
   services?: string[];
   hours?: Record<string, string> | null;
   service_areas?: string[] | null;
+  serviceAreasFull?: string[] | null;
+  neighborhood?: string | null;
   theme?: {
     primary: string;
     accent: string;
@@ -41,220 +42,112 @@ const DAY_LABELS: Record<string, string> = {
   sunday: "Sunday",
 };
 
-// ⭐ Convert Google Maps share link → embed link
 function convertToEmbedUrl(url: string): string {
   if (!url) return "";
-
-  // Already embed
   if (url.includes("/embed")) return url;
-
-  // /maps/place/... → /maps/embed?...
-  if (url.includes("/maps/place/")) {
-    const base = url.split("/maps/place/")[1]?.split("/")[0] ?? "";
-    return `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d0!2d0!3d0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s${encodeURIComponent(
-      base,
-    )}!5e0!3m2!1sen!2sca!4v0`;
-  }
-
-  // Short links (maps.app.goo.gl)
-  if (url.includes("goo.gl")) {
-    return `https://www.google.com/maps/embed?pb=${encodeURIComponent(url)}`;
-  }
-
-  // Fallback
-  return `https://www.google.com/maps/embed?pb=${encodeURIComponent(url)}`;
+  const encoded = encodeURIComponent(url);
+  return `https://www.google.com/maps/embed?pb=${encoded}`;
 }
 
-// Determine if business is open right now
-function getOpenStatus(hours: Record<string, string> | null) {
-  if (!hours) return null;
-
-  const now = new Date();
-  const dayKey = DAY_ORDER[now.getDay()];
-  const todayHours = hours[dayKey];
-
-  if (!todayHours || todayHours.toLowerCase() === "closed") return "closed";
-  if (todayHours.includes("24/7")) return "open";
-
-  const [start, end] = todayHours.split(" - ");
-  if (!start || !end) return null;
-
-  const startDate = new Date(`1970-01-01 ${start}`);
-  const endDate = new Date(`1970-01-01 ${end}`);
-
-  if (now >= startDate && now <= endDate) return "open";
-  return "closed";
-}
-
-// Extract neighborhood from address
-function extractNeighborhood(address?: string | null): string | null {
-  if (!address) return null;
-  const parts = address.split(",");
-  if (parts.length < 2) return null;
-  return parts[1].trim();
-}
-
-// Build service area tag text
-function buildServiceAreaTag(
-  service_areas?: string[] | null,
-  neighborhood?: string | null,
-): string {
+function buildServiceAreaTag(service_areas?: string[] | null): string {
   if (service_areas && service_areas.length > 0) {
     const sorted = [...service_areas].sort((a, b) => a.localeCompare(b, "en"));
-
-    if (sorted.length <= 3) {
-      return `Serving ${sorted.join(", ")}`;
-    }
-
-    const firstThree = sorted.slice(0, 3).join(", ");
-    return `Serving ${firstThree} and more`;
+    if (sorted.length <= 3) return `Serving ${sorted.join(", ")}`;
+    return `Serving ${sorted.slice(0, 3).join(", ")} and more`;
   }
-
-  if (neighborhood) return `Serving ${neighborhood}`;
-
   return "Serving Ottawa";
 }
 
-export default function BusinessCard({
-  name,
-  tagline,
-  phone,
-  address,
-  website_url,
-  services = [],
-  hours,
-  service_areas,
-  theme,
-  lat,
-  lng,
-  map_url,
-}: BusinessCardProps) {
-  const bg = theme?.background || "var(--obo-light-surface)";
-  const text = theme?.text || "var(--obo-light-text)";
-  const primary = theme?.primary || "var(--obo-light-text)";
-  const accent = theme?.accent || "var(--obo-light-accent)";
+function getOpenStatus(hours: Record<string, string> | null) {
+  if (!hours) return null;
+  const now = new Date();
+  const dayKey = DAY_ORDER[now.getDay()];
+  const todayHours = hours[dayKey];
+  if (!todayHours || todayHours.toLowerCase() === "closed") return "closed";
+  if (todayHours.includes("24/7")) return "open";
+  const [start, end] = todayHours.split(" - ");
+  if (!start || !end) return null;
+  const startDate = new Date(`1970-01-01 ${start}`);
+  const endDate = new Date(`1970-01-01 ${end}`);
+  return now >= startDate && now <= endDate ? "open" : "closed";
+}
 
+export default function BusinessCard(props: BusinessCardProps) {
+  const {
+    name,
+    tagline,
+    phone,
+    address,
+    website_url,
+    services,
+    hours,
+    service_areas,
+    serviceAreasFull,
+    neighborhood,
+    lat,
+    lng,
+    map_url,
+  } = props;
+
+  const safeServices = Array.isArray(services) ? services : [];
+  const hasServices = safeServices.length > 0;
   const hasHours = hours && Object.keys(hours).length > 0;
-  const hasServices = Array.isArray(services) && services.length > 0;
 
   const openStatus = getOpenStatus(hours);
-  const neighborhood = extractNeighborhood(address);
-  const serviceAreaTag = buildServiceAreaTag(service_areas, neighborhood);
+  const serviceAreaTag = buildServiceAreaTag(service_areas);
 
   const websiteDomain = website_url
     ? website_url.replace("https://", "").replace("http://", "").split("/")[0]
     : null;
 
   return (
-    <article
-      aria-label={`${name} business profile`}
-      style={{
-        fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
-        maxWidth: "760px",
-        margin: "0 auto",
-        borderRadius: "18px",
-        border: `1px solid rgba(0,0,0,0.06)`,
-        background: bg,
-        color: text,
-        padding: "28px 28px 32px",
-        boxShadow: "0 22px 55px rgba(0,0,0,0.16)",
-      }}
-    >
+    <article className="business-card" aria-label={`${name} business profile`}>
       {/* Header */}
-      <header
-        style={{
-          marginBottom: "20px",
-          paddingBottom: "16px",
-          borderBottom: `1px solid rgba(0,0,0,0.06)`,
-        }}
-      >
-        <h1
-          style={{
-            margin: 0,
-            fontSize: "1.8rem",
-            lineHeight: 1.2,
-            color: primary,
-          }}
-        >
-          {name}
-        </h1>
-
-        {tagline && (
-          <p
-            style={{
-              margin: "6px 0 0",
-              fontSize: "1rem",
-              color: "rgba(0,0,0,0.65)",
-            }}
-          >
-            {tagline}
-          </p>
-        )}
+      <header className="business-card-header">
+        <h1 className="business-card-title">{name}</h1>
+        {tagline && <p className="business-card-tagline">{tagline}</p>}
       </header>
 
-      {/* Contact + location */}
-      <section
-        aria-label="Contact and location"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "minmax(0, 2fr) minmax(0, 1.3fr)",
-          gap: "20px",
-          alignItems: "flex-start",
-        }}
-      >
+      {/* Contact + Location */}
+      <section className="business-card-info-grid">
         <div>
           {address && (
-            <p style={{ margin: "0 0 10px", fontSize: "1rem" }}>
-              <span style={{ fontWeight: 600 }}>📍 Address:</span>{" "}
-              <span style={{ color: "rgba(0,0,0,0.7)" }}>{address}</span>
+            <p className="business-card-info-item">
+              <span className="business-card-label">📍 Address:</span> {address}
             </p>
           )}
 
-          {map_url && (
-            <p style={{ margin: "0 0 10px", fontSize: "1rem" }}>
-              <a
-                href={map_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: accent,
-                  textDecoration: "none",
-                  fontWeight: 600,
-                }}
-              >
-                Open in Google Maps →
-              </a>
+          {neighborhood && (
+            <p className="business-card-info-item">
+              <span className="business-card-label">🏙️ Neighbourhood:</span>{" "}
+              {neighborhood}
+            </p>
+          )}
+
+          {serviceAreasFull && serviceAreasFull.length > 0 && (
+            <p className="business-card-info-item">
+              <span className="business-card-label">🗺️ Service areas:</span>{" "}
+              {serviceAreasFull.join(", ")}
             </p>
           )}
 
           {phone && (
-            <p style={{ margin: "0 0 10px", fontSize: "1rem" }}>
-              <span style={{ fontWeight: 600 }}>📞 Phone:</span>{" "}
-              <a
-                href={`tel:${phone}`}
-                style={{
-                  color: accent,
-                  textDecoration: "none",
-                  fontWeight: 600,
-                }}
-              >
+            <p className="business-card-info-item">
+              <span className="business-card-label">📞 Phone:</span>{" "}
+              <a href={`tel:${phone}`} className="business-card-link">
                 {phone}
               </a>
             </p>
           )}
 
           {websiteDomain && (
-            <p style={{ margin: 0, fontSize: "1rem" }}>
-              <span style={{ fontWeight: 600 }}>🌐 Website:</span>{" "}
+            <p className="business-card-info-item">
+              <span className="business-card-label">🌐 Website:</span>{" "}
               <a
                 href={website_url!}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  color: accent,
-                  textDecoration: "none",
-                  fontWeight: 600,
-                }}
+                className="business-card-link"
               >
                 {websiteDomain} →
               </a>
@@ -264,64 +157,32 @@ export default function BusinessCard({
 
         {/* Hours */}
         {hasHours && (
-          <div aria-label="Opening hours">
-            <p
-              style={{
-                margin: "0 0 6px",
-                fontSize: "1rem",
-                fontWeight: 700,
-                color: primary,
-              }}
-            >
+          <div>
+            <p className="business-card-hours-title">
               🕒 Hours{" "}
               {openStatus && (
                 <span
-                  style={{
-                    marginLeft: "6px",
-                    fontSize: "0.85rem",
-                    padding: "2px 8px",
-                    borderRadius: "999px",
-                    background:
-                      openStatus === "open"
-                        ? "rgba(22,163,74,0.12)"
-                        : "rgba(220,38,38,0.12)",
-                    color: openStatus === "open" ? "#15803d" : "#b91c1c",
-                    fontWeight: 600,
-                  }}
+                  className={
+                    openStatus === "open"
+                      ? "business-card-open"
+                      : "business-card-closed"
+                  }
                 >
                   {openStatus === "open" ? "Open now" : "Closed"}
                 </span>
               )}
             </p>
 
-            <dl
-              style={{
-                margin: 0,
-                fontSize: "0.92rem",
-                display: "grid",
-                gridTemplateColumns: "auto 1fr",
-                columnGap: "10px",
-                rowGap: "4px",
-              }}
-            >
+            <dl className="business-card-hours-list">
               {DAY_ORDER.map((day) => {
                 const key = day.toLowerCase();
                 const value = hours![key];
                 if (!value) return null;
 
                 return (
-                  <div key={day} style={{ display: "contents" }}>
-                    <dt style={{ fontWeight: 600 }}>
-                      {DAY_LABELS[key] || day}
-                    </dt>
-                    <dd
-                      style={{
-                        margin: 0,
-                        color: "rgba(0,0,0,0.7)",
-                      }}
-                    >
-                      {value}
-                    </dd>
+                  <div key={day} className="business-card-hours-row">
+                    <dt>{DAY_LABELS[key]}</dt>
+                    <dd>{value}</dd>
                   </div>
                 );
               })}
@@ -332,145 +193,63 @@ export default function BusinessCard({
 
       {/* Services */}
       {hasServices && (
-        <section
-          aria-label="Key services"
-          style={{
-            marginTop: "26px",
-            borderTop: "1px solid rgba(0,0,0,0.06)",
-            paddingTop: "18px",
-          }}
-        >
-          <h2
-            style={{
-              margin: "0 0 12px",
-              fontSize: "1.15rem",
-              color: primary,
-            }}
-          >
+        <section className="business-card-section">
+          <h2 className="business-card-section-title">
             🛠️ Services at a glance
           </h2>
 
-          <ul
-            style={{
-              margin: 0,
-              paddingLeft: "20px",
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-              gap: "6px 20px",
-              fontSize: "0.95rem",
-              color: "rgba(0,0,0,0.7)",
-            }}
-          >
-            {services.slice(0, 8).map((service, idx) => (
-              <li key={idx}>{service}</li>
+          <ul className="business-card-services-grid">
+            {safeServices.slice(0, 8).map((service, idx) => (
+              <li key={idx} className="business-card-service-tag">
+                {service}
+              </li>
             ))}
           </ul>
 
-          {services.length > 8 && (
-            <p
-              style={{
-                marginTop: "8px",
-                fontSize: "0.9rem",
-                color: accent,
-                fontWeight: 600,
-              }}
-            >
-              + {services.length - 8} more services
+          {safeServices.length > 8 && (
+            <p className="business-card-more-services">
+              + {safeServices.length - 8} more services
             </p>
           )}
         </section>
       )}
 
-      {/* ⭐ Mini Map (Google Maps embed conversion — no API key needed) */}
+      {/* Mini Map */}
       {map_url && (
-        <section
-          aria-label="Mini map"
-          style={{
-            marginTop: "26px",
-            borderTop: "1px solid rgba(0,0,0,0.06)",
-            paddingTop: "18px",
-          }}
-        >
-          <h2
-            style={{
-              margin: "0 0 12px",
-              fontSize: "1.15rem",
-              color: primary,
-            }}
-          >
-            🗺️ Location
-          </h2>
+        <section className="business-card-section">
+          <h2 className="business-card-section-title">🗺️ Location</h2>
 
           <iframe
             width="100%"
             height="180"
-            style={{
-              border: 0,
-              borderRadius: "12px",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.12)",
-            }}
+            className="business-card-map"
             loading="lazy"
             src={convertToEmbedUrl(map_url)}
           ></iframe>
 
-          <p style={{ marginTop: "10px", fontSize: "0.95rem" }}>
-            <a
-              href={map_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                color: accent,
-                fontWeight: 600,
-                textDecoration: "none",
-              }}
-            >
-              View larger map →
-            </a>
-          </p>
+          <a
+            href={
+              lat && lng
+                ? `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`
+                : `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                    address || "",
+                  )}`
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+            className="business-card-map-link"
+          >
+            Get directions →
+          </a>
         </section>
       )}
 
       {/* Footer tags */}
-      <footer
-        aria-label="Business trust signals"
-        style={{
-          marginTop: "26px",
-          paddingTop: "16px",
-          borderTop: "1px solid rgba(0,0,0,0.06)",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "8px 14px",
-          fontSize: "0.95rem",
-          color: "rgba(0,0,0,0.75)",
-        }}
-      >
-        <span
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "6px",
-            padding: "6px 10px",
-            borderRadius: "999px",
-            background: "rgba(0,0,0,0.05)",
-            fontWeight: 600,
-          }}
-        >
+      <footer className="business-card-footer">
+        <span className="business-card-footer-tag">
           📍 Local Ottawa business
         </span>
-
-        <span
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "6px",
-            padding: "6px 10px",
-            borderRadius: "999px",
-            background: "rgba(0,0,0,0.05)",
-            fontWeight: 600,
-          }}
-        >
-          🗺️ {serviceAreaTag}
-        </span>
+        <span className="business-card-footer-tag">🗺️ {serviceAreaTag}</span>
       </footer>
     </article>
   );
