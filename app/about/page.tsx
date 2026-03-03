@@ -13,6 +13,7 @@ export default function AboutPage() {
 
           <div className="nav-links">
             <Link href="/">Home</Link>
+            <Link href="/">Guide</Link>
             <Link href="/business">Businesses</Link>
             <Link href="/about">About</Link>
           </div>

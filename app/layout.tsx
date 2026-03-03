@@ -2,7 +2,7 @@ import "./globals.css";
 import "../styles/styles.css";
 
 export const metadata = {
-  title: "OBO – Online Business Optimiser",
+  title: "OBO – Business Website Optimiser",
   description: "Structured, accessible, search‑ready business pages.",
 };
 
@@ -13,9 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased bg-[var(--obo-white)] text-[var(--obo-black)]">
-        {children}
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

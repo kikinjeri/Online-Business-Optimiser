@@ -52,7 +52,7 @@
 
 .preview-card:hover {
   transform: translateY(-4px);
-  background: #22252b;
+  background: var(--obo-bg-soft);
 }
 
 .preview-card h3 {
@@ -98,7 +98,7 @@
 
 .row-card:hover {
   transform: translateY(-4px);
-  background: #22252b;
+  background: var(--obo-bg-soft);
 }
 
 .row-card h3 {
@@ -177,10 +177,10 @@
 }
 
 /* ==========================================================
-   BUSINESS DIRECTORY PAGE
+   BUSINESS DIRECTORY PAGE (LEGACY SAFE STYLES)
 ========================================================== */
 
-.business-page {
+.directory-page {
   max-width: 900px;
   margin: 0 auto;
   padding: 40px 20px;

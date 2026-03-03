@@ -13,6 +13,7 @@ export default function HomePage() {
           </Link>
 
           <div className="nav-links">
+            <Link href="/guide">Guide</Link>
             <Link href="/business">Businesses</Link>
             <Link href="/about">About</Link>
           </div>
@@ -24,10 +25,12 @@ export default function HomePage() {
           <h1 className="app-hero-title">
             Increase your business website traffic.
             <span className="accent"> Reach More People.</span>
-           
           </h1>
-          <h2> Accessibility translates into real‑world traffic and growth for your
-            business. </h2>
+          <h2>
+            {" "}
+            Accessibility translates into real‑world traffic and growth for your
+            business.{" "}
+          </h2>
 
           <p className="app-hero-subtitle">
             Business Website Optimiser transforms your business details into

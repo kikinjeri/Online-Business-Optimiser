@@ -1,3 +1,4 @@
+// app/business/page.tsx
 import Link from "next/link";
 import { supabaseServer } from "@/lib/supabase/server";
 
@@ -6,7 +7,7 @@ export default async function BusinessPage() {
 
   const { data: businesses, error } = await supabase
     .from("businesses")
-    .select("id, name, phone, website_url, slug, tagline_en, address")
+    .select("id, name, slug")
     .order("name");
 
   if (error) {
@@ -18,58 +19,145 @@ export default async function BusinessPage() {
     );
   }
 
+  // Global accessible theme (same defaults as BusinessCard)
+  const theme = {
+    primary: "#111827",
+    text: "#111827",
+    accent: "#2563eb",
+  };
+
   return (
-    <main className="business-directory">
-      <div className="container">
-        <nav className="navbar" role="navigation" aria-label="Main">
-          <div className="nav-inner">
-            <Link href="/" className="nav-logo">
+    <main
+      className="business-directory"
+      style={{
+        padding: "32px 0",
+      }}
+    >
+      <div
+        className="container"
+        style={{
+          maxWidth: "700px",
+          margin: "0 auto",
+        }}
+      >
+        {/* Navbar */}
+        <nav
+          className="navbar"
+          role="navigation"
+          aria-label="Main"
+          style={{
+            marginBottom: "32px",
+            paddingBottom: "16px",
+            borderBottom: `1px solid ${theme.primary}22`,
+          }}
+        >
+          <div
+            className="nav-inner"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Link
+              href="/"
+              className="nav-logo"
+              style={{
+                fontSize: "1.2rem",
+                fontWeight: 700,
+                textDecoration: "none",
+                color: theme.primary,
+              }}
+            >
               Business Website Optimiser
             </Link>
 
-            <div className="nav-links">
-              <Link href="/">Home</Link>
-              <Link href="/about">About</Link>
-              <Link href="/business">Businesses</Link>
+            <div
+              className="nav-links"
+              style={{
+                display: "flex",
+                gap: "18px",
+                fontSize: "0.95rem",
+              }}
+            >
+              <Link
+                href="/"
+                style={{ textDecoration: "none", color: theme.text }}
+              >
+                Home
+              </Link>
+              <Link
+                href="/guide"
+                style={{ textDecoration: "none", color: theme.text }}
+              >
+                Guide
+              </Link>
+              <Link
+                href="/business"
+                style={{ textDecoration: "none", color: theme.text }}
+              >
+                Business
+              </Link>
+              <Link
+                href="/about"
+                style={{ textDecoration: "none", color: theme.text }}
+              >
+                About
+              </Link>
             </div>
           </div>
         </nav>
 
-        <h1 className="directory-title">Local Businesses</h1>
+        {/* Page Title */}
+        <h1
+          className="directory-title"
+          style={{
+            fontSize: "2rem",
+            marginBottom: "24px",
+            color: theme.primary,
+          }}
+        >
+          Local Businesses
+        </h1>
 
-        <section className="directory-list">
+        {/* Simple list of business names */}
+        <section
+          className="directory-list"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+          }}
+        >
           {businesses?.map((b) => (
             <Link
               key={b.id}
               href={`/business/${b.slug}`}
-              className="directory-row"
+              style={{
+                fontSize: "1.1rem",
+                fontWeight: 600,
+                color: theme.accent,
+                textDecoration: "none",
+                padding: "4px 0",
+              }}
             >
-              <span className="row-name">{b.name}</span>
-
-              {b.tagline_en && (
-                <span className="row-tagline">{b.tagline_en}</span>
-              )}
-
-              {b.phone && <span className="row-phone">{b.phone}</span>}
-
-              {b.website_url && (
-                <span className="row-website">
-                  {b.website_url.replace("https://", "").replace("http://", "")}
-                </span>
-              )}
-
-              {b.address && (
-                <span className="row-city">
-                  {b.address.split(",")[1]?.trim() || "—"}
-                </span>
-              )}
-
-              <span className="row-view">View →</span>
+              {b.name}
             </Link>
           ))}
         </section>
 
-        <footer className="footer">
+        {/* Footer */}
+        <footer
+          className="footer"
+          style={{
+            marginTop: "40px",
+            paddingTop: "20px",
+            borderTop: `1px solid ${theme.primary}22`,
+            textAlign: "center",
+            color: `${theme.text}aa`,
+            fontSize: "0.9rem",
+          }}
+        >
           © {new Date().getFullYear()} Business Website Optimiser
         </footer>
       </div>
