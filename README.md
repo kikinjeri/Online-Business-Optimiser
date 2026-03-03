@@ -1,96 +1,55 @@
-OBO — Online Business Optimiser
-OBO is a premium, accessibility‑first platform that transforms raw business details into semantic, search‑ready, editorial‑quality business pages. It’s designed for local service businesses that need clarity, trust, and visibility — without hiring a full web team.
+# Business Website Optimiser
 
-Every OBO page is fast, accessible, WCAG‑minded, and structured for both humans and search engines. The result feels custom, intentional, and premium.
+Business Website Optimiser is a fast, accessibility‑first platform that turns local business details into clean, search‑optimised, high‑performance web pages.  
+It focuses on semantic HTML, WCAG‑minded structure, and mobile‑first layouts to help businesses rank higher and reach more customers.
 
-🌱 Purpose
-Local businesses often struggle with:
+---
 
-Generic templates
+## 🚀 Features
 
-Poor accessibility
+- **Lightning‑fast, SEO‑optimised pages**  
+  Clean semantic markup designed for Google indexing and Core Web Vitals.
 
-Weak SEO structure
+- **Accessibility‑first architecture**  
+  WCAG‑minded structure, keyboard‑friendly navigation, and screen‑reader clarity.
 
-Inconsistent or unclear information
+- **Embeddable business cards**  
+  Lightweight, iframe‑ready cards that can be embedded on any website.
 
-OBO solves this by generating clean, semantic HTML with editorial polish and consistent structure — elevating local businesses beyond directory listings.
+- **Local business directory**  
+  Browse and view published businesses with consistent, accessible layouts.
 
-🧭 How OBO Works
-You provide the essentials  
-Services, location, hours, accessibility details, and what makes the business unique.
+- **Supabase‑powered backend**  
+  Real‑time data, secure storage, and scalable business profiles.
 
-OBO builds the semantic page  
-Clean structure, correct landmarks, and premium editorial layout.
+---
 
-You share or embed it anywhere  
-Google Business Profile, websites, social platforms, or as a standalone page.
+## 📸 Screenshots
 
-🧩 Core Features
-Semantic HTML with correct headings and ARIA landmarks
+### **Homepage**
+![Homepage](./screenshots/homepage.jpeg)
 
-WCAG‑minded accessibility baked into every page
+### **Guide**
+![Guide](./screenshots/guide.jpeg)
 
-Editorial clarity that feels premium and trustworthy
+### **Businesses Directory**
+![Businesses Directory](./screenshots/businesses.jpeg)
 
-Embeddable business cards for sharing and SEO
+### **About Profile**
+![Business Profile](./screenshots/about.jpeg)
 
-Consistent structure that improves search engine understanding
+---
 
-Mobile‑first, responsive layouts
+## 🧱 Tech Stack
 
-📸 Screenshots
-<div align="center">
+- **Next.js 14 (App Router)**
+- **React**
+- **Supabase**
+- **TypeScript**
+- **CSS Modules / Custom Styles**
+- **Vercel Deployment**
 
-🏠 Homepage
-<img src="./screenshots/homepage.jpeg" alt="OBO Homepage" width="800" />
+---
 
-ℹ️ About Page
-<img src="./screenshots/about.jpeg" alt="OBO About Page" width="800" />
+## 📂 Project Structure
 
-</div>
-
-🛠️ Tech Stack
-Next.js / React — modern, fast, accessible UI
-
-TypeScript — reliability and maintainability
-
-Semantic HTML + ARIA — accessibility and structure
-
-CSS Modules / Tailwind (depending on setup) — clean, scalable styling
-
-Postgres / API layer — structured business data (if applicable)
-
-📦 Getting Started
-Install dependencies
-bash
-npm install
-Run the development server
-bash
-npm run dev
-Visit http://localhost:3000 to view the app.
-
-📁 Project Structure
-txt
-/
-├─ app/                # Next.js routes (homepage, about, business pages)
-├─ components/         # Reusable UI components
-├─ lib/                # Utilities, parsers, helpers
-├─ public/             # Static assets (screenshots, icons)
-└─ styles/             # Global and component styles
-🧪 Example Output (Semantic Business Section)
-html
-<section aria-labelledby="business-name">
-  <h1 id="business-name">Business Name</h1>
-  <p>Short description of what the business does and who it serves.</p>
-  <p><strong>Location:</strong> Address, City</p>
-  <p><strong>Hours:</strong> Days · Opening–Closing</p>
-  <p><strong>Contact:</strong> (000) 000‑0000 · email@example.com</p>
-  <p><strong>Accessibility:</strong> Accessibility details go here.</p>
-</section>
-🎯 Vision
-OBO exists to make local businesses visible, trustworthy, and accessible — without complexity.
-It’s built with care, editorial intention, and a deep respect for structure.
-
-📜 License
-MIT License.
