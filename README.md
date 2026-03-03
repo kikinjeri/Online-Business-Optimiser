@@ -38,6 +38,9 @@ It focuses on semantic HTML, WCAG‑minded structure, and mobile‑first layouts
 ### **About Profile**
 ![Business Profile](./screenshots/about.jpeg)
 
+### **Business-card**
+![business-Card](./screenshots/business-card.jpeg)
+
 ---
 
 ## 🧱 Tech Stack
